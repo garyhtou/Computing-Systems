@@ -26,23 +26,23 @@ void grepStream(istream &stream, char *searchTerm)
 
 int main(int arg, char *argv[])
 {
-	// Guard case for when no command-line arguments are passed in.
-	// This guarrantees that we have a search term argument (however, there may
-	// still be no file paths)
+	// Guard clause for when no command-line arguments are passed in.
 	if (arg <= 1)
 	{
 		cout << "wcat: file [file ...]" << endl;
 		return 1;
 	}
 
+	// The guard clause above guarrantees that we have a search term argument
+	// (however, there may be no file paths)
 	char *searchTerm = argv[1];
 
-	// Guard case for when no file paths are passed in
-	if (arg <= 2)
+	// Guard clause for when no file path arguments are passed in
+	if (arg == 2)
 	{
 		// We have a search term, but no file paths. Read the file from the standard
-		// input (stdin)
-		grepStream(stdin, searchTerm);
+		// input (cin)
+		grepStream(cin, searchTerm);
 
 		// we're done!
 		return 0;
@@ -59,7 +59,7 @@ int main(int arg, char *argv[])
 		// Create a file stream
 		ifstream file(filePath);
 
-		// Guard case for when the file stream fails to open
+		// Guard clause for when the file stream fails to open
 		if (!file.is_open())
 		{
 			// Since the file stream failed to open, print an error message

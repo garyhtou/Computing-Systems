@@ -28,7 +28,7 @@ void printFile(char *filePath)
 
 int main(int arg, char *argv[])
 {
-	// Guard case for when no command-line arguments are passed in
+	// Guard clause for when no command-line arguments are passed in
 	if (arg <= 1)
 	{
 		cout << "wcat: file [file ...]" << endl;
