@@ -1,6 +1,7 @@
 // Gary Tou
 // January 10, 2022
 // CPSC 3500, Project 1
+// wcat.cpp
 
 #include <iostream>
 #include <fstream>
@@ -28,19 +29,19 @@ void printFile(char *filePath)
 int main(int arg, char *argv[])
 {
 	// Guard case for when no command-line arguments are passed in
-	if (arg == 0)
+	if (arg <= 1)
 	{
 		cout << "wcat: file [file ...]" << endl;
 		return 1;
 	}
 
-	// Iterate through the command-line arguments (file paths)
-	for (int i = 0; i < arg - 1; i++)
+	// Iterate through the command-line arguments (file paths).
+	// The first command-line arguments starts at index 1 since argv[0] is the
+	// name of the program (wcat).
+	for (int i = 1; i < arg; i++)
 	{
 		// Print the file.
-		//   The first command-line arguments starts at index 1 since argv[0] is the
-		//   name of the program (wcat)
-		printFile(argv[i + 1]);
+		printFile(argv[i]);
 	}
 
 	return 0;
