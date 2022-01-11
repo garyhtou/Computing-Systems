@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <bitset>
 using namespace std;
 
 string decodeRun(char character, string countBinStr)

@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <bitset>
 using namespace std;
 
 string encodeRun(char character, uint32_t count)
