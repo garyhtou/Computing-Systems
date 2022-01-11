@@ -35,12 +35,21 @@ void unzipFile(ifstream &file)
 
 	// String representation of the binary number
 	string countBinStr = "";
+	// We are forced to implement are counter to 32 bits instead of using a
+	// non '1' and '0' character as a delimiter. This is because '1' and '0' can
+	// appear as a char in the encoded string
+	int counter = 0;
 	char character;
 
 	// Loop through all lines in the file
 	while (file.get(character))
 	{
-		if (isdigit(character))
+		// Increment the counter
+		counter++;
+
+		bool isBinaryChar = character == '1' || character == '0';
+		bool isCharOfRun = counter == 32 + 1; // 32 count + 1 char
+		if (isBinaryChar && !isCharOfRun)
 		{
 			// The current character is a digit. Append it to the binary string
 			countBinStr += character;
@@ -55,6 +64,7 @@ void unzipFile(ifstream &file)
 
 			// Reset and move onto the next encoded character run
 			countBinStr = "";
+			counter = 0;
 		}
 	}
 }
