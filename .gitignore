@@ -1,5 +1,6 @@
 *.o
 .vscode
+.DS_Store
 
 # Project 1 binary files
 /project1/wcat
