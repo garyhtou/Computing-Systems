@@ -10,5 +10,3 @@ wzip: wzip.cpp
 	$(CC) $(CFLAGS) wzip.cpp -o wzip
 wunzip: wunzip.cpp
 	$(CC) $(CFLAGS) wunzip.cpp -o wunzip
-clean:
-	rm –f *o hello
