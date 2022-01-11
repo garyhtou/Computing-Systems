@@ -30,7 +30,9 @@ void zipFile(ifstream &file)
 		// Guard clause for when the file stream fails to open
 		if (!file.is_open())
 		{
-			// Since the file stream failed to open, print an error message
+			// Since the file stream failed to open, attempt to close the file and
+			// print an error message
+			file.close();
 			failureExit();
 		}
 		// Counter is a 32 bit integer because the compression format (Run Length
@@ -96,6 +98,9 @@ int main(int arg, char *argv[])
 			// Zip the file.
 			// `zipFile` will check if the file stream is open
 			zipFile(file);
+
+			// Close the file
+			file.close();
 		}
 
 		// We've zipped all the files!

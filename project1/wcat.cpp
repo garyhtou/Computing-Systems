@@ -25,10 +25,15 @@ void printFile(char *filePath)
 		{
 			// print out the stream buffer
 			cout << file.rdbuf();
+
+			// close file
+			file.close();
 		}
 		else
 		{
-			// Since the file stream failed to open, print an error message
+			// Since the file stream failed to open, attempt to close the file and
+			// print an error message
+			file.close();
 			failureExit();
 		}
 	}

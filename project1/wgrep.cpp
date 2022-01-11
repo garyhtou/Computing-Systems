@@ -72,12 +72,17 @@ int main(int arg, char *argv[])
 				// Guard clause for when the file stream fails to open
 				if (!file.is_open())
 				{
+					// attempt to close the file
+					file.close();
+					// exit with an error message
 					failureExit();
 				}
 
 				// Grep the file stream
-
 				grepStream(file, searchTerm);
+
+				// Close the file
+				file.close();
 			}
 			catch (const ifstream::failure &e)
 			{

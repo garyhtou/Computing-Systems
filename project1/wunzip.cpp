@@ -35,7 +35,9 @@ void unzipFile(ifstream &file)
 		// Guard clause for when the file stream fails to open
 		if (!file.is_open())
 		{
-			// Since the file stream failed to open, print an error message
+			// Since the file stream failed to open, attempt to close the file and
+			// print an error message
+			file.close();
 			failureExit();
 		}
 
@@ -105,6 +107,9 @@ int main(int arg, char *argv[])
 			// Unzip the file.
 			// `unzipFile` will check if the file stream is open
 			unzipFile(file);
+
+			// Close the file
+			file.close();
 		}
 
 		// We've unzipped all the files!
