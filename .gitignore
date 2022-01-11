@@ -1,0 +1,8 @@
+*.o
+.vscode
+
+# Project 1 binary files
+/project1/wcat
+/project1/wgrep
+/project1/wzip
+/project1/wunzip
