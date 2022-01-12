@@ -1,9 +1,20 @@
-# Project 1
+# CSPC 3500 Project 1
 
-## Questions
-- wcat
-  - Can we use ios::rdbuf to read from the file?
-- wgrep
-  - Does it need to support regex?
-- wzip/wunzip
-  - Will the input file be restricted to ASCII?
+**Author:** Gary Tou <gary@garytou.com> (https://garytou.com)
+
+**Email:** [gtou@seattleu.com](mailto:gtou@seattleu.com)
+
+**Date:** January 10, 2022
+
+## About
+
+This project consists of four UNIX-like utilities:
+
+- `cat`: `wcat`
+- `grep`: `wgrep`
+- `zip`: `wzip`
+- `unzip`: `wunzip`
+
+https://seattleu.instructure.com/courses/1601766/assignments/6993203
+
+Submitted on cs1.seattleu.edu
