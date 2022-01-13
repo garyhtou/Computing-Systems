@@ -37,8 +37,7 @@ int main(int arg, char *argv[])
 		// Guard clause for when no command-line arguments are passed in.
 		if (arg <= 1)
 		{
-			cout << "wcat: file [file ...]" << endl;
-			return 1;
+			cout << "wgrep: searchterm [file ...]" << endl;
 		}
 
 		// The guard clause above guarrantees that we have a search term argument
