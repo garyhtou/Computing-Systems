@@ -8,78 +8,32 @@
 #include <bitset>
 using namespace std;
 
-string decodeRun(char character, string countBinStr)
+void printDecodedRun(char character, uint32_t count)
 {
-	// Convert the string representation of the binary number to a decimal integer
-	// The binary string should be 32 bits long
-	uint32_t count = bitset<32>(countBinStr).to_ulong();
-
-	// Form the decoded return string
-	string decoding = "";
-	for (uint32_t i = 0; i < count; i++)
+	for (int i = 0; i < count; i++)
 	{
-		decoding += character;
+		cout.write(&character, 1);
 	}
-
-	return decoding;
 }
 
-void failureExit()
-{
-	cout << "wunzip: cannot open file" << endl;
-	exit(1);
-}
 void unzipFile(ifstream &file)
 {
-	try
+
+	uint32_t counter;
+	char counterBlock[4];
+	char character[1];
+
+	// Loop through all 5-byte blocks in the file
+	//   counter: 4-byte block
+	//   character: 1-byte block
+	while (file.read(reinterpret_cast<char *>(&counterBlock), 4) && file.read(character, 1))
 	{
-		// Guard clause for when the file stream fails to open
-		if (!file.is_open())
-		{
-			// Since the file stream failed to open, attempt to close the file and
-			// print an error message
-			file.close();
-			failureExit();
-		}
+		// Cast the counter from a char array to a uint32_t
+		// counter = reinterpret_cast<uint32_t>(counterBlock);
+		counter = *(int *)&counterBlock;
 
-		// String representation of the binary number
-		string countBinStr = "";
-		// We are forced to implement are counter to 32 bits instead of using a
-		// non '1' and '0' character as a delimiter. This is because '1' and '0' can
-		// appear as a char in the encoded string
-		int counter = 0;
-		char character;
-
-		// Loop through all lines in the file
-		while (file.get(character))
-		{
-			// Increment the counter
-			counter++;
-
-			bool isBinaryChar = character == '1' || character == '0';
-			bool isCharOfRun = counter == 32 + 1; // 32 count + 1 char
-			if (isBinaryChar && !isCharOfRun)
-			{
-				// The current character is a digit. Append it to the binary string
-				countBinStr += character;
-			}
-			else
-			{
-				// The current character is not a digit. This means that we have hit the
-				// end of an encoded run.
-
-				// Decode (decompress) and print the run
-				cout << decodeRun(character, countBinStr); // No `endl`
-
-				// Reset and move onto the next encoded character run
-				countBinStr = "";
-				counter = 0;
-			}
-		}
-	}
-	catch (const ifstream::failure &e)
-	{
-		failureExit();
+		// Print the decoded run
+		printDecodedRun(*character, counter);
 	}
 }
 
@@ -105,8 +59,17 @@ int main(int arg, char *argv[])
 			// Create a file stream
 			ifstream file(filePath);
 
-			// Unzip the file.
-			// `unzipFile` will check if the file stream is open
+			// Guard clause for when the file stream fails to open
+			if (!file.is_open())
+			{
+				// Since the file stream failed to open, attempt to close the file and
+				// print an error message
+				file.close();
+				cout << "wunzip: cannot open file" << endl;
+				return 1;
+			}
+
+			// Unzip the file and print the decoded file to the standard output
 			unzipFile(file);
 
 			// Close the file
@@ -115,6 +78,11 @@ int main(int arg, char *argv[])
 
 		// We've unzipped all the files!
 		return 0;
+	}
+	catch (const ifstream::failure &e)
+	{
+		cout << "wunzip: cannot open file" << endl;
+		return 1;
 	}
 	catch (...)
 	{
