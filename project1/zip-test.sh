@@ -11,7 +11,7 @@ eval "./wunzip $1.zip > $1.unzip"
 echo
 
 echo "=== BIN '$1' ==="
-eval "xxd -b -c 5 $1"
+eval "xxd -b -c 5 $1.zip"
 echo
 
 echo "=== BIN '$1.unzip' ==="
