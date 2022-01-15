@@ -10,7 +10,7 @@ using namespace std;
 
 void printDecodedRun(char character, uint32_t count)
 {
-	for (int i = 0; i < count; i++)
+	for (uint32_t i = 0; i < count; i++)
 	{
 		cout.write(&character, 1);
 	}
