@@ -60,37 +60,34 @@ int main(int arg, char *argv[])
 		// the program (wgrep) and argv[1] is the search term
 		for (int i = 2; i < arg; i++)
 		{
-			try
+			// Get the file path
+			char *filePath = argv[i];
+
+			// Create a file stream
+			ifstream file(filePath);
+
+			// Guard clause for when the file stream fails to open
+			if (!file)
 			{
-				// Get the file path
-				char *filePath = argv[i];
-
-				// Create a file stream
-				ifstream file(filePath);
-
-				// Guard clause for when the file stream fails to open
-				if (!file.is_open())
-				{
-					// attempt to close the file
-					file.close();
-					// exit with an error message
-					failureExit();
-				}
-
-				// Grep the file stream
-				grepStream(file, searchTerm);
-
-				// Close the file
+				// attempt to close the file
 				file.close();
-			}
-			catch (const ifstream::failure &e)
-			{
+				// exit with an error message
 				failureExit();
 			}
+
+			// Grep the file stream
+			grepStream(file, searchTerm);
+
+			// Close the file
+			file.close();
 		}
 
 		// We've grep'ed all the files
 		return 0;
+	}
+	catch (const ifstream::failure &e)
+	{
+		failureExit();
 	}
 	catch (...)
 	{

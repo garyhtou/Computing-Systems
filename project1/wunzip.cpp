@@ -60,7 +60,7 @@ int main(int arg, char *argv[])
 			ifstream file(filePath);
 
 			// Guard clause for when the file stream fails to open
-			if (!file.is_open())
+			if (!file)
 			{
 				// Since the file stream failed to open, attempt to close the file and
 				// print an error message

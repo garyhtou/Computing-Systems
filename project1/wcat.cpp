@@ -15,32 +15,23 @@ void failureExit()
 
 void printFile(char *filePath)
 {
-	try
-	{
-		// Create a file stream with the provided file path
-		ifstream file(filePath);
+	// Create a file stream with the provided file path
+	ifstream file(filePath);
 
-		// Check if the file stream is open
-		if (file.is_open())
-		{
-			// print out the stream buffer
-			cout << file.rdbuf();
-
-			// close file
-			file.close();
-		}
-		else
-		{
-			// Since the file stream failed to open, attempt to close the file and
-			// print an error message
-			file.close();
-			failureExit();
-		}
-	}
-	catch (const ifstream::failure &e)
+	// Check if the file stream is open
+	if (!file)
 	{
+		// Since the file stream failed to open, attempt to close the file and
+		// print an error message
+		file.close();
 		failureExit();
 	}
+
+	// print out the stream buffer
+	cout << file.rdbuf();
+
+	// close file
+	file.close();
 }
 
 int main(int arg, char *argv[])
@@ -64,6 +55,10 @@ int main(int arg, char *argv[])
 		}
 
 		return 0;
+	}
+	catch (const ifstream::failure &e)
+	{
+		failureExit();
 	}
 	catch (...)
 	{
