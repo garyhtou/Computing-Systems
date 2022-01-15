@@ -26,7 +26,7 @@ void unzipFile(ifstream &file)
 	// Loop through all 5-byte blocks in the file
 	//   counter: 4-byte block
 	//   character: 1-byte block
-	while (file.read(reinterpret_cast<char *>(&counterBlock), 4) && file.read(character, 1))
+	while (file.read(counterBlock, 4) && file.read(character, 1))
 	{
 		// Cast the counter from a char array to a uint32_t
 		// counter = reinterpret_cast<uint32_t>(counterBlock);
