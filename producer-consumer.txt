@@ -1,0 +1,33 @@
+// Pseudocode for producer consumer semaphore lock problem
+
+// The problem:
+//   - accessing data at the same time
+//   - writing when full
+//   - reading when empty
+
+buffer // shared buffer
+
+empty_sem  // semaphore for the producer — don't write if buffer is full
+full_sem  // semaphore for the consumer — don't read if buffer is empty
+
+// Lock for critical section — Don't access shared data at the same time
+lock
+unlock
+
+
+// PRODUCER
+data = "Producer"
+sem_wait(empty_sem)
+lock()
+buffer.write(data)
+unlock()
+sem_post(full_sem)
+
+
+// CONSUMER
+sem_wait(full_sem)
+lock()
+data = buffer.read()
+unlock()
+sem_post(empty_sem)
+print(data)
